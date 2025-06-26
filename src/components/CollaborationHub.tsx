@@ -32,7 +32,7 @@ export const CollaborationHub = () => {
   };
 
   return (
-    <Card className="bg-slate-800/50 backdrop-blur-sm border-purple-700/30 p-4">
+    <Card className="bg-black/30 backdrop-blur-sm border-purple-500/30 p-4">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-lg font-semibold text-purple-300">AI Collaborators</h3>
         <div className="text-xs text-purple-400">{collaborators.filter(c => c.status === 'active').length} Active</div>
@@ -40,7 +40,7 @@ export const CollaborationHub = () => {
 
       <div className="space-y-2">
         {collaborators.map((collaborator) => (
-          <div key={collaborator.id} className="bg-slate-900/30 rounded-lg p-3 border border-purple-700/20">
+          <div key={collaborator.id} className="bg-black/30 rounded-lg p-3 border border-purple-500/20 backdrop-blur-sm">
             <div className="flex items-center space-x-3">
               <div className="text-lg">{collaborator.avatar}</div>
               <div className="flex-1 min-w-0">
@@ -58,7 +58,7 @@ export const CollaborationHub = () => {
 
       <Button 
         size="sm" 
-        className="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs"
+        className="w-full mt-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs backdrop-blur-sm"
       >
         Coordinate Team
       </Button>

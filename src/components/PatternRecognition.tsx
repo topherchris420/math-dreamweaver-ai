@@ -49,27 +49,27 @@ export const PatternRecognition = ({ domain }: PatternRecognitionProps) => {
   };
 
   return (
-    <Card className="bg-slate-800/50 backdrop-blur-sm border-green-700/30 p-4">
+    <Card className="bg-black/30 backdrop-blur-sm border-emerald-500/30 p-4">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-semibold text-green-300">Pattern Recognition</h3>
+        <h3 className="text-lg font-semibold text-emerald-300">Pattern Recognition</h3>
         {isAnalyzing ? (
-          <div className="w-4 h-4 border-2 border-green-400/30 border-t-green-400 rounded-full animate-spin"></div>
+          <div className="w-4 h-4 border-2 border-emerald-400/30 border-t-emerald-400 rounded-full animate-spin"></div>
         ) : (
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
         )}
       </div>
 
       <div className="space-y-3">
         {patterns.map((pattern, idx) => (
-          <div key={idx} className="bg-slate-900/30 rounded-lg p-3 border border-green-700/20">
+          <div key={idx} className="bg-black/30 rounded-lg p-3 border border-emerald-500/20 backdrop-blur-sm">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-green-300">{pattern.type} Pattern</span>
-              <span className="text-xs text-green-400">{Math.round(pattern.confidence * 100)}%</span>
+              <span className="text-sm font-medium text-emerald-300">{pattern.type} Pattern</span>
+              <span className="text-xs text-emerald-400">{Math.round(pattern.confidence * 100)}%</span>
             </div>
-            <p className="text-xs text-green-200">{pattern.description}</p>
-            <div className="w-full bg-slate-800 rounded-full h-1 mt-2">
+            <p className="text-xs text-emerald-200">{pattern.description}</p>
+            <div className="w-full bg-black/50 rounded-full h-1 mt-2">
               <div 
-                className="bg-gradient-to-r from-green-400 to-teal-400 h-1 rounded-full transition-all duration-1000"
+                className="bg-gradient-to-r from-emerald-400 to-teal-400 h-1 rounded-full transition-all duration-1000"
                 style={{ width: `${pattern.confidence * 100}%` }}
               ></div>
             </div>
@@ -78,7 +78,7 @@ export const PatternRecognition = ({ domain }: PatternRecognitionProps) => {
       </div>
 
       {patterns.length === 0 && !isAnalyzing && (
-        <div className="text-center py-4 text-green-400/60">
+        <div className="text-center py-4 text-emerald-400/60">
           <div className="text-2xl mb-1">∞</div>
           <p className="text-xs">Analyzing mathematical patterns...</p>
         </div>

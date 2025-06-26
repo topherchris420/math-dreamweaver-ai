@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MathWorkspace } from '@/components/MathWorkspace';
 import { DomainSelector } from '@/components/DomainSelector';
 import { ConjecturePanel } from '@/components/ConjecturePanel';
@@ -8,7 +8,7 @@ import { VisualizationEngine } from '@/components/VisualizationEngine';
 import { NaturalLanguageBuilder } from '@/components/NaturalLanguageBuilder';
 import { CollaborationHub } from '@/components/CollaborationHub';
 import { PatternRecognition } from '@/components/PatternRecognition';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export type MathDomain = 'topology' | 'number-theory' | 'combinatorics' | 'algebraic-geometry' | 'analysis';
@@ -24,17 +24,30 @@ const Index = () => {
     proofSteps: []
   });
 
+  // Enable dark mode by default for the iOS black aesthetic
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 font-inter">
-      {/* Header - Gemini-inspired */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm">
+    <div className="min-h-screen bg-black font-inter relative overflow-hidden">
+      {/* Animated background particles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full opacity-60 floating"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-500 rounded-full opacity-70 floating" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-50 floating" style={{animationDelay: '4s'}}></div>
+        <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-60 floating" style={{animationDelay: '6s'}}></div>
+      </div>
+
+      {/* Header - iOS inspired with glass morphism */}
+      <header className="sticky top-0 z-50 glass-morphism">
         <div className="flex items-center justify-between px-4 lg:px-6 h-16">
           <div className="flex items-center space-x-4">
             {/* Mobile menu button */}
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden"
+              className="lg:hidden text-white hover:bg-white/10"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -42,16 +55,19 @@ const Index = () => {
             
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <img
-                src="/lovable-uploads/21ab93f1-5c73-4d40-a193-6e958bcd969b.png"
-                alt="Symmatria"
-                className="w-8 h-8 rounded-lg object-cover"
-              />
+              <div className="relative">
+                <img
+                  src="/lovable-uploads/21ab93f1-5c73-4d40-a193-6e958bcd969b.png"
+                  alt="Symmatria"
+                  className="w-8 h-8 rounded-lg object-cover pulse-glow"
+                />
+                <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-blue-400 animate-pulse" />
+              </div>
               <div>
-                <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
+                <h1 className="text-xl font-semibold text-white">
                   Symmatria
                 </h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Mathematical Co-Author</p>
+                <p className="text-xs text-gray-300">Mathematical Co-Author</p>
               </div>
             </div>
           </div>
@@ -70,15 +86,15 @@ const Index = () => {
         {/* Sidebar - Mobile Overlay */}
         {sidebarOpen && (
           <div 
-            className="fixed inset-0 z-40 lg:hidden bg-black/50"
+            className="fixed inset-0 z-40 lg:hidden bg-black/80 backdrop-blur-sm"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
         {/* Left Sidebar */}
         <aside className={`
-          fixed lg:static inset-y-0 left-0 z-50 w-80 bg-gray-50 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 
-          transform transition-transform duration-200 ease-in-out lg:transform-none overflow-y-auto
+          fixed lg:static inset-y-0 left-0 z-50 w-80 glass-morphism
+          transform transition-transform duration-300 ease-in-out lg:transform-none overflow-y-auto
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
           <div className="p-4 space-y-6">
@@ -92,7 +108,7 @@ const Index = () => {
 
             {/* Navigation */}
             <div className="space-y-2">
-              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+              <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide">
                 Discovery Tools
               </h3>
               <div className="space-y-1">
@@ -108,10 +124,10 @@ const Index = () => {
                       setActiveView(tool.id as any);
                       setSidebarOpen(false);
                     }}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                       activeView === tool.id
-                        ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300'
-                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        ? 'bg-blue-600/30 text-blue-300 backdrop-blur-sm border border-blue-500/30 pulse-glow'
+                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
                     }`}
                   >
                     <span className="text-lg">{tool.icon}</span>
@@ -129,7 +145,7 @@ const Index = () => {
         {/* Main Content */}
         <main className="flex-1 flex overflow-hidden">
           {/* Center Panel */}
-          <div className="flex-1 relative bg-white dark:bg-gray-950">
+          <div className="flex-1 relative bg-black/50 backdrop-blur-sm">
             {activeView === 'workspace' && (
               <MathWorkspace 
                 domain={currentDomain}
@@ -153,7 +169,7 @@ const Index = () => {
           </div>
 
           {/* Right Panel - Desktop Only */}
-          <aside className="hidden xl:block w-80 border-l border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+          <aside className="hidden xl:block w-80 glass-morphism">
             <div className="p-4">
               <ConjecturePanel 
                 domain={currentDomain}
