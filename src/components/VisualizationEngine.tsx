@@ -77,13 +77,12 @@ export const VisualizationEngine = ({ domain }: VisualizationEngineProps) => {
                   <div className="w-64 h-48 bg-gradient-to-br from-green-500/20 to-teal-500/20 rounded-lg flex items-center justify-center relative">
                     <div className="absolute inset-0 opacity-30">
                       {[...Array(20)].map((_, i) => (
-                        <div key={i} className={`absolute w-2 h-2 bg-green-400 rounded-full`} 
+                        <div key={i} className="absolute w-2 h-2 bg-green-400 rounded-full animate-pulse" 
                              style={{
                                left: `${Math.random() * 100}%`,
                                top: `${Math.random() * 100}%`,
                                animationDelay: `${i * 0.1}s`
-                             }}
-                             className="animate-pulse"></div>
+                             }}></div>
                       ))}
                     </div>
                     <div className="text-green-300 text-lg z-10">ζ(s) = Σn⁻ˢ</div>
