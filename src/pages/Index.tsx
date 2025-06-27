@@ -1,26 +1,16 @@
+
 import { useState, useEffect } from 'react';
-import { MathWorkspace } from '@/components/MathWorkspace';
-import { DomainSelector } from '@/components/DomainSelector';
-import { ConjecturePanel } from '@/components/ConjecturePanel';
-import { ProofExplorer } from '@/components/ProofExplorer';
-import { VisualizationEngine } from '@/components/VisualizationEngine';
-import { NaturalLanguageBuilder } from '@/components/NaturalLanguageBuilder';
-import { CollaborationHub } from '@/components/CollaborationHub';
-import { PatternRecognition } from '@/components/PatternRecognition';
-import { TheoremProver } from '@/components/TheoremProver';
-import { SymbolicEngine } from '@/components/SymbolicEngine';
-import { LaTeXRenderer } from '@/components/LaTeXRenderer';
-import { CitationManager } from '@/components/CitationManager';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Brain, Users, Infinity, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CosmologicalReflector } from '@/components/CosmologicalReflector';
+import { MathWorkspace } from '@/components/MathWorkspace';
+import { DomainSelector } from '@/components/DomainSelector';
 
 export type MathDomain = 'topology' | 'number-theory' | 'combinatorics' | 'algebraic-geometry' | 'analysis';
 
 const Index = () => {
   const [currentDomain, setCurrentDomain] = useState<MathDomain>('topology');
-  const [activeView, setActiveView] = useState<'workspace' | 'proof' | 'visualization' | 'language' | 'formal' | 'symbolic' | 'latex' | 'citations'>('workspace');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeMode, setActiveMode] = useState<'home' | 'think' | 'collaborate'>('home');
   const [discoverySession, setDiscoverySession] = useState({
     theorems: [],
     conjectures: [],
@@ -28,185 +18,211 @@ const Index = () => {
     proofSteps: []
   });
 
-  // Enable dark mode by default for the iOS black aesthetic
+  // Enable dark mode by default
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
 
-  return (
-    <div className="min-h-screen bg-black font-inter relative overflow-hidden">
-      {/* Animated background particles */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-500 rounded-full opacity-60 floating"></div>
-        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-500 rounded-full opacity-70 floating" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-50 floating" style={{animationDelay: '4s'}}></div>
-        <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-orange-500 rounded-full opacity-60 floating" style={{animationDelay: '6s'}}></div>
-      </div>
-
-      {/* Header - iOS inspired with glass morphism */}
-      <header className="sticky top-0 z-50 glass-morphism">
-        <div className="flex items-center justify-between px-4 lg:px-6 h-16">
-          <div className="flex items-center space-x-4">
-            {/* Mobile menu button */}
+  if (activeMode === 'think') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        
+        {/* Header */}
+        <header className="relative z-10 p-6">
+          <div className="flex items-center justify-between">
             <Button
               variant="ghost"
-              size="sm"
-              className="lg:hidden text-white hover:bg-white/10"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
+              onClick={() => setActiveMode('home')}
+              className="text-white/80 hover:text-white hover:bg-white/10"
             >
-              {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              ← Back
             </Button>
-            
-            {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <img
-                  src="/lovable-uploads/21ab93f1-5c73-4d40-a193-6e958bcd969b.png"
-                  alt="Symmatria"
-                  className="w-8 h-8 rounded-lg object-cover pulse-glow"
-                />
-                <Sparkles className="absolute -top-1 -right-1 w-3 h-3 text-blue-400 animate-pulse" />
+            <h1 className="text-2xl font-light text-white">SYMMATRIA</h1>
+            <div></div>
+          </div>
+        </header>
+
+        {/* Think Mode Content */}
+        <div className="relative z-10 container mx-auto px-6 py-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="w-32 h-32 mx-auto mb-8 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <Brain className="w-16 h-16 text-white" />
               </div>
-              <div>
-                <h1 className="text-xl font-semibold text-white">
-                  Symmatria
-                </h1>
-                <p className="text-xs text-gray-300">Formal Mathematical Co-Author</p>
+              <h1 className="text-6xl font-thin text-white mb-6 tracking-wider">THINK</h1>
+              <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+                Autonomous AI contemplation on the nature of finite and infinite universes. 
+                Pure contemplative exploration without interaction.
+              </p>
+              <div className="flex items-center justify-center mt-8 text-white/60">
+                <Infinity className="w-6 h-6 mr-3" />
+                <span className="text-lg font-light">Autonomous Contemplation</span>
               </div>
             </div>
-          </div>
 
-          {/* Domain Selector - Desktop */}
-          <div className="hidden md:block">
-            <DomainSelector 
-              currentDomain={currentDomain}
-              onDomainChange={setCurrentDomain}
-            />
+            <CosmologicalReflector />
           </div>
         </div>
-      </header>
+      </div>
+    );
+  }
 
-      <div className="flex h-[calc(100vh-64px)]">
-        {/* Sidebar - Mobile Overlay */}
-        {sidebarOpen && (
-          <div 
-            className="fixed inset-0 z-40 lg:hidden bg-black/80 backdrop-blur-sm"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
+  if (activeMode === 'collaborate') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 relative">
+        <div className="absolute inset-0 bg-black/20"></div>
+        
+        {/* Header */}
+        <header className="relative z-10 p-6">
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              onClick={() => setActiveMode('home')}
+              className="text-white/80 hover:text-white hover:bg-white/10"
+            >
+              ← Back
+            </Button>
+            <h1 className="text-2xl font-light text-white">SYMMATRIA</h1>
+            <div className="hidden md:block">
+              <DomainSelector 
+                currentDomain={currentDomain}
+                onDomainChange={setCurrentDomain}
+              />
+            </div>
+          </div>
+        </header>
 
-        {/* Left Sidebar */}
-        <aside className={`
-          fixed lg:static inset-y-0 left-0 z-50 w-80 glass-morphism
-          transform transition-transform duration-300 ease-in-out lg:transform-none overflow-y-auto
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-        `}>
-          <div className="p-4 space-y-6">
-            {/* Mobile Domain Selector */}
-            <div className="lg:hidden">
+        {/* Collaborate Mode Content */}
+        <div className="relative z-10 h-[calc(100vh-96px)]">
+          <div className="container mx-auto px-6 h-full">
+            <div className="text-center mb-8">
+              <div className="w-24 h-24 mx-auto mb-6 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <Users className="w-12 h-12 text-white" />
+              </div>
+              <h1 className="text-5xl font-thin text-white mb-4 tracking-wider">COLLABORATE</h1>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">
+                AI-powered mathematical discovery through human-machine collaboration. 
+                Explore novel structures, theorems, and conjectures.
+              </p>
+            </div>
+
+            <div className="md:hidden mb-6">
               <DomainSelector 
                 currentDomain={currentDomain}
                 onDomainChange={setCurrentDomain}
               />
             </div>
 
-            {/* Navigation */}
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide">
-                Mathematical Tools
-              </h3>
-              <div className="space-y-1">
-                {[
-                  { id: 'workspace', label: 'Symbolic Canvas', icon: '∇' },
-                  { id: 'formal', label: 'Theorem Prover', icon: '⊢' },
-                  { id: 'symbolic', label: 'Symbolic Engine', icon: '∑' },
-                  { id: 'proof', label: 'Proof Atelier', icon: '∴' },
-                  { id: 'visualization', label: 'Visual Geometry', icon: '◊' },
-                  { id: 'latex', label: 'LaTeX Typesetting', icon: '𝒯' },
-                  { id: 'language', label: 'Theorem Poet', icon: '℘' },
-                  { id: 'citations', label: 'Bibliography', icon: '📚' }
-                ].map((tool) => (
-                  <button
-                    key={tool.id}
-                    onClick={() => {
-                      setActiveView(tool.id as any);
-                      setSidebarOpen(false);
-                    }}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      activeView === tool.id
-                        ? 'bg-blue-600/30 text-blue-300 backdrop-blur-sm border border-blue-500/30 pulse-glow'
-                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                    }`}
-                  >
-                    <span className="text-lg">{tool.icon}</span>
-                    <span>{tool.label}</span>
-                  </button>
-                ))}
+            <MathWorkspace 
+              domain={currentDomain}
+              onDiscovery={(discovery) => {
+                setDiscoverySession(prev => ({
+                  ...prev,
+                  ...discovery
+                }));
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Home screen
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 relative overflow-hidden">
+      {/* Animated background particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/60 rounded-full floating"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400/70 rounded-full floating" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-emerald-400/50 rounded-full floating" style={{animationDelay: '4s'}}></div>
+        <div className="absolute bottom-1/4 left-1/2 w-1 h-1 bg-orange-400/60 rounded-full floating" style={{animationDelay: '6s'}}></div>
+      </div>
+
+      <div className="absolute inset-0 bg-black/20"></div>
+      
+      <div className="relative z-10 container mx-auto px-6 py-12">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-8">
+              <div className="relative">
+                <img
+                  src="/lovable-uploads/21ab93f1-5c73-4d40-a193-6e958bcd969b.png"
+                  alt="Symmatria"
+                  className="w-16 h-16 rounded-full object-cover pulse-glow"
+                />
+                <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-blue-400 animate-pulse" />
+              </div>
+            </div>
+            
+            <h1 className="text-7xl font-thin text-white mb-6 tracking-widest">
+              SYMMATRIA
+            </h1>
+            <p className="text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
+              An immersive environment for mathematical exploration and AI-powered discovery
+            </p>
+          </div>
+
+          {/* Main Sections */}
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            {/* Think Section */}
+            <div 
+              className="group cursor-pointer"
+              onClick={() => setActiveMode('think')}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-12 text-center hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:border-white/20">
+                <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all duration-500">
+                  <Brain className="w-16 h-16 text-white group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                
+                <h2 className="text-4xl font-thin text-white mb-6 tracking-wider">THINK</h2>
+                
+                <p className="text-white/70 text-lg leading-relaxed mb-8">
+                  Autonomous AI contemplation on the nature of finite and infinite universes. 
+                  Pure contemplative exploration without interaction.
+                </p>
+                
+                <div className="flex items-center justify-center text-white/50 group-hover:text-white/70 transition-colors duration-300">
+                  <Infinity className="w-5 h-5 mr-3" />
+                  <span className="text-sm font-light tracking-wide">Autonomous Contemplation</span>
+                </div>
               </div>
             </div>
 
-            <PatternRecognition domain={currentDomain} />
-            <CosmologicalReflector />
-            <CollaborationHub />
-          </div>
-        </aside>
-
-        {/* Main Content */}
-        <main className="flex-1 flex overflow-hidden">
-          {/* Center Panel */}
-          <div className="flex-1 relative bg-black/50 backdrop-blur-sm">
-            {activeView === 'workspace' && (
-              <MathWorkspace 
-                domain={currentDomain}
-                onDiscovery={(discovery) => {
-                  setDiscoverySession(prev => ({
-                    ...prev,
-                    ...discovery
-                  }));
-                }}
-              />
-            )}
-            {activeView === 'formal' && (
-              <div className="h-full p-6">
-                <TheoremProver domain={currentDomain} />
+            {/* Collaborate Section */}
+            <div 
+              className="group cursor-pointer"
+              onClick={() => setActiveMode('collaborate')}
+            >
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-12 text-center hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:border-white/20">
+                <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-full flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-indigo-500/30 transition-all duration-500">
+                  <Users className="w-16 h-16 text-white group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                
+                <h2 className="text-4xl font-thin text-white mb-6 tracking-wider">COLLABORATE</h2>
+                
+                <p className="text-white/70 text-lg leading-relaxed mb-8">
+                  AI-powered mathematical discovery through human-machine collaboration. 
+                  Explore novel structures, theorems, and conjectures.
+                </p>
+                
+                <div className="flex items-center justify-center text-white/50 group-hover:text-white/70 transition-colors duration-300">
+                  <Sparkles className="w-5 h-5 mr-3" />
+                  <span className="text-sm font-light tracking-wide">Interactive Discovery</span>
+                </div>
               </div>
-            )}
-            {activeView === 'symbolic' && (
-              <div className="h-full p-6">
-                <SymbolicEngine domain={currentDomain} />
-              </div>
-            )}
-            {activeView === 'proof' && (
-              <ProofExplorer domain={currentDomain} />
-            )}
-            {activeView === 'visualization' && (
-              <VisualizationEngine domain={currentDomain} />
-            )}
-            {activeView === 'latex' && (
-              <div className="h-full p-6">
-                <LaTeXRenderer />
-              </div>
-            )}
-            {activeView === 'language' && (
-              <NaturalLanguageBuilder domain={currentDomain} />
-            )}
-            {activeView === 'citations' && (
-              <div className="h-full p-6">
-                <CitationManager />
-              </div>
-            )}
-          </div>
-
-          {/* Right Panel - Desktop Only */}
-          <aside className="hidden xl:block w-80 glass-morphism">
-            <div className="p-4">
-              <ConjecturePanel 
-                domain={currentDomain}
-                discoveries={discoverySession}
-              />
             </div>
-          </aside>
-        </main>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-16">
+            <p className="text-white/40 text-sm font-light">
+              Select a mode to begin your mathematical journey
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -93,48 +93,8 @@
 
   body {
     @apply bg-background text-foreground font-inter;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #000000 50%, #2d2d2d 75%, #000000 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
     min-height: 100vh;
   }
-
-  .dark body {
-    background: linear-gradient(135deg, #000000 0%, #0d0d0d 25%, #1a1a1a 50%, #000000 75%, #0f0f0f 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 20s ease infinite;
-  }
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  75% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Glass morphism effects */
-.glass-morphism {
-  backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.125);
-}
-
-.glass-morphism-light {
-  backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.25);
-  border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
 /* Floating animation */
