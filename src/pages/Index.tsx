@@ -13,6 +13,7 @@ import { LaTeXRenderer } from '@/components/LaTeXRenderer';
 import { CitationManager } from '@/components/CitationManager';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CosmologicalReflector } from '@/components/CosmologicalReflector';
 
 export type MathDomain = 'topology' | 'number-theory' | 'combinatorics' | 'algebraic-geometry' | 'analysis';
 
@@ -145,6 +146,7 @@ const Index = () => {
             </div>
 
             <PatternRecognition domain={currentDomain} />
+            <CosmologicalReflector />
             <CollaborationHub />
           </div>
         </aside>
