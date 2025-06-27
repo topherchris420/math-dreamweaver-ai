@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { MathWorkspace } from '@/components/MathWorkspace';
 import { DomainSelector } from '@/components/DomainSelector';
@@ -8,6 +7,10 @@ import { VisualizationEngine } from '@/components/VisualizationEngine';
 import { NaturalLanguageBuilder } from '@/components/NaturalLanguageBuilder';
 import { CollaborationHub } from '@/components/CollaborationHub';
 import { PatternRecognition } from '@/components/PatternRecognition';
+import { TheoremProver } from '@/components/TheoremProver';
+import { SymbolicEngine } from '@/components/SymbolicEngine';
+import { LaTeXRenderer } from '@/components/LaTeXRenderer';
+import { CitationManager } from '@/components/CitationManager';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -15,7 +18,7 @@ export type MathDomain = 'topology' | 'number-theory' | 'combinatorics' | 'algeb
 
 const Index = () => {
   const [currentDomain, setCurrentDomain] = useState<MathDomain>('topology');
-  const [activeView, setActiveView] = useState<'workspace' | 'proof' | 'visualization' | 'language'>('workspace');
+  const [activeView, setActiveView] = useState<'workspace' | 'proof' | 'visualization' | 'language' | 'formal' | 'symbolic' | 'latex' | 'citations'>('workspace');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [discoverySession, setDiscoverySession] = useState({
     theorems: [],
@@ -67,7 +70,7 @@ const Index = () => {
                 <h1 className="text-xl font-semibold text-white">
                   Symmatria
                 </h1>
-                <p className="text-xs text-gray-300">Mathematical Co-Author</p>
+                <p className="text-xs text-gray-300">Formal Mathematical Co-Author</p>
               </div>
             </div>
           </div>
@@ -109,14 +112,18 @@ const Index = () => {
             {/* Navigation */}
             <div className="space-y-2">
               <h3 className="text-sm font-medium text-gray-300 uppercase tracking-wide">
-                Discovery Tools
+                Mathematical Tools
               </h3>
               <div className="space-y-1">
                 {[
                   { id: 'workspace', label: 'Symbolic Canvas', icon: '∇' },
-                  { id: 'proof', label: 'Proof Atelier', icon: '⊢' },
+                  { id: 'formal', label: 'Theorem Prover', icon: '⊢' },
+                  { id: 'symbolic', label: 'Symbolic Engine', icon: '∑' },
+                  { id: 'proof', label: 'Proof Atelier', icon: '∴' },
                   { id: 'visualization', label: 'Visual Geometry', icon: '◊' },
-                  { id: 'language', label: 'Theorem Poet', icon: '℘' }
+                  { id: 'latex', label: 'LaTeX Typesetting', icon: '𝒯' },
+                  { id: 'language', label: 'Theorem Poet', icon: '℘' },
+                  { id: 'citations', label: 'Bibliography', icon: '📚' }
                 ].map((tool) => (
                   <button
                     key={tool.id}
@@ -157,14 +164,34 @@ const Index = () => {
                 }}
               />
             )}
+            {activeView === 'formal' && (
+              <div className="h-full p-6">
+                <TheoremProver domain={currentDomain} />
+              </div>
+            )}
+            {activeView === 'symbolic' && (
+              <div className="h-full p-6">
+                <SymbolicEngine domain={currentDomain} />
+              </div>
+            )}
             {activeView === 'proof' && (
               <ProofExplorer domain={currentDomain} />
             )}
             {activeView === 'visualization' && (
               <VisualizationEngine domain={currentDomain} />
             )}
+            {activeView === 'latex' && (
+              <div className="h-full p-6">
+                <LaTeXRenderer />
+              </div>
+            )}
             {activeView === 'language' && (
               <NaturalLanguageBuilder domain={currentDomain} />
+            )}
+            {activeView === 'citations' && (
+              <div className="h-full p-6">
+                <CitationManager />
+              </div>
             )}
           </div>
 
