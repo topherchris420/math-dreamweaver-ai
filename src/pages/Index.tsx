@@ -149,9 +149,9 @@ const Index = () => {
             <div className="flex items-center justify-center mb-8">
               <div className="relative">
                 <img
-                  src="/lovable-uploads/21ab93f1-5c73-4d40-a193-6e958bcd969b.png"
+                  src="/lovable-uploads/0655b16a-52bf-46c6-9db5-6406b0609b31.png"
                   alt="Symmatria"
-                  className="w-16 h-16 rounded-full object-cover pulse-glow"
+                  className="w-24 h-24 rounded-full object-cover pulse-glow"
                 />
                 <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-blue-400 animate-pulse" />
               </div>
