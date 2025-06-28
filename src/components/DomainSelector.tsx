@@ -17,23 +17,23 @@ const domains = [
 export const DomainSelector = ({ currentDomain, onDomainChange }: DomainSelectorProps) => {
   return (
     <div className="space-y-3">
-      <div className="text-sm font-medium text-gray-300">
+      <div className="text-xs sm:text-sm font-medium text-gray-300 text-center lg:text-left">
         Mathematical Domain
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap justify-center lg:justify-start gap-2">
         {domains.map((domain) => (
           <button
             key={domain.id}
             onClick={() => onDomainChange(domain.id as MathDomain)}
-            className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 backdrop-blur-sm border ${
+            className={`px-2 sm:px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 backdrop-blur-sm border touch-manipulation min-h-[44px] flex items-center ${
               currentDomain === domain.id
                 ? domain.color + ' ring-2 ring-current/50 pulse-glow'
-                : 'text-gray-400 bg-white/5 border-gray-600/30 hover:bg-white/10 hover:text-white hover:border-gray-500/50'
+                : 'text-gray-400 bg-white/5 border-gray-600/30 hover:bg-white/10 hover:text-white hover:border-gray-500/50 active:scale-95'
             }`}
           >
-            <div className="flex items-center space-x-2">
-              <span className="text-lg">{domain.symbol}</span>
-              <span className="hidden sm:inline">{domain.label}</span>
+            <div className="flex items-center space-x-1 sm:space-x-2">
+              <span className="text-base sm:text-lg">{domain.symbol}</span>
+              <span className="hidden sm:inline lg:hidden xl:inline">{domain.label}</span>
             </div>
           </button>
         ))}

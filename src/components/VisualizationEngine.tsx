@@ -23,15 +23,15 @@ export const VisualizationEngine = ({ domain }: VisualizationEngineProps) => {
   };
 
   return (
-    <div className="h-full bg-slate-800/30 backdrop-blur-sm rounded-xl border border-blue-700/30 p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-blue-300">Mathematical Visualization Engine</h2>
-        <div className="text-sm text-blue-400 capitalize">
+    <div className="h-full bg-slate-800/30 backdrop-blur-sm rounded-xl border border-blue-700/30 p-3 sm:p-4 lg:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
+        <h2 className="text-lg sm:text-xl font-bold text-blue-300">Mathematical Visualization Engine</h2>
+        <div className="text-xs sm:text-sm text-blue-400 capitalize">
           {domain.replace('-', ' ')} Domain
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 h-full">
         {/* Visualization Types */}
         <VisualizationTypesList 
           domain={domain}
@@ -39,8 +39,8 @@ export const VisualizationEngine = ({ domain }: VisualizationEngineProps) => {
         />
 
         {/* Visualization Canvas */}
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-blue-300">Visualization Canvas</h3>
+        <div className="space-y-3 sm:space-y-4">
+          <h3 className="text-base sm:text-lg font-semibold text-blue-300">Visualization Canvas</h3>
           <VisualizationCanvas 
             domain={domain}
             activeVisualization={activeVisualization}
